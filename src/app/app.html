@@ -1,0 +1,30 @@
+<button type="button" *ngIf="!isDisabled" (click)="fillData()">Popuni podatke</button>
+
+<h1>{{title}}</h1>
+<h2 *ngIf="product && product.quantity<=20">{{product?.name}}</h2>
+
+<div *ngIf="product">
+  <p>Šifra: {{product.code}}</p>
+  <p>Naziv proizvoda: {{product.name}}</p>
+  <p>Količina: {{product.quantity}}</p>
+  <p>Cijena: {{product.price}}</p>
+</div>
+
+<table>
+  <thead>
+    <th>Šifra</th>
+    <th>Naziv</th>
+    <th>Količina</th>
+    <th>Cijena</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pr of productList">
+      <td>{{pr.code}}</td>
+      <td>{{pr.name}}</td>
+      <td>{{pr.quantity}}</td>
+      <td>{{pr.price}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<app-product-list></app-product-list>
