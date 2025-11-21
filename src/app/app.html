@@ -1,30 +1,48 @@
-<button type="button" *ngIf="!isDisabled" (click)="fillData()">Popuni podatke</button>
+<h1>Datum: {{today | date:'dd.MM.yyyy HH:mm:ss'}}</h1>
+<input type="text" #searchValue (input)="onInput(searchValue.value)" />
+<h2>{{productName | uppercase}}</h2>
 
-<h1>{{title}}</h1>
-<h2 *ngIf="product && product.quantity<=20">{{product?.name}}</h2>
+<input type="text" (keyup.enter)="onKeyUp()" />
+<input type="text" (mouseenter)="onMouseEnter($event)" />
+<button type="button" (dblclick)="onDoubleClick($event)">Click me twice</button>
+<button type="button" (contextmenu)="onRightClick($event)">Right click</button>
 
-<div *ngIf="product">
-  <p>Šifra: {{product.code}}</p>
-  <p>Naziv proizvoda: {{product.name}}</p>
-  <p>Količina: {{product.quantity}}</p>
-  <p>Cijena: {{product.price}}</p>
+<div style="margin-top:20px;margin-bottom:20px;padding:20px;border:1px solid salmon">
+  <label style="margin-right:15px;">Naziv proizvoda</label>
+  <input type="text" [(ngModel)]="productName" (input)="changeProductName()" />
+  <div>
+    <select [(ngModel)]="selectedType" (change)="changeProductType()">
+      <option *ngFor="let i of productTypeList" [value]="i.id">{{i.name}}</option>
+    </select>
+  </div>
+  <h4>Trenutno odabrani tip proizvoda je: {{selectedTypeName}}</h4>
 </div>
-
 <table>
   <thead>
-    <th>Šifra</th>
+    <th>Slika</th>
+    <th>Kod</th>
     <th>Naziv</th>
-    <th>Količina</th>
     <th>Cijena</th>
+    <th>Kolicina</th>
+    <th>Popust</th>
+    <th>Opis</th>
+    <th></th>
   </thead>
   <tbody>
-    <tr *ngFor="let pr of productList">
-      <td>{{pr.code}}</td>
-      <td>{{pr.name}}</td>
-      <td>{{pr.quantity}}</td>
-      <td>{{pr.price}}</td>
+    <tr *ngFor="let i of products">
+      <td>
+        <img [src]="i.image" width="80" height="80" />
+      </td>
+      <td>{{i.code}}</td>
+      <td>{{i.name }}</td>
+      <td [ngClass]="i.discount?'discountedProduct':'notDiscountedProduct'">{{i.price | currency:'EUR'}}</td>
+      <td>{{i.quantity}}</td>
+      <td *ngIf="i.discount==true">DA</td>
+      <td *ngIf="i.discount==false">NE</td>
+      <td>{{i.description | slice:0:5}}</td>
+      <td>
+        <button type="button" [disabled]="isDisabled">Uredi</button>
+      </td>
     </tr>
   </tbody>
 </table>
-
-<app-product-list></app-product-list>
