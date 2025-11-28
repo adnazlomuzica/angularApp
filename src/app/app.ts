@@ -1,16 +1,17 @@
 import { NgFor, NgIf, NgClass, NgStyle, UpperCasePipe, LowerCasePipe, DatePipe, TitleCasePipe, DecimalPipe, CurrencyPipe, SlicePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductList } from "./components/product-list/product-list";
 import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-root',
   standalone:true,
-  imports: [NgIf, NgFor, NgClass, NgStyle, UpperCasePipe, LowerCasePipe, DatePipe, TitleCasePipe, DecimalPipe, CurrencyPipe, SlicePipe, FormsModule],
+  imports: [NgIf, NgFor, NgClass, NgStyle, UpperCasePipe, LowerCasePipe, DatePipe, TitleCasePipe, DecimalPipe, CurrencyPipe, SlicePipe, FormsModule, RouterLink, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit{
    
   products: any[]=[
     {code:'A1-23', name:'Coca Cola', price: 3, discount:false, quantity: 10, description: "Coca Cola je gazirano pice!", image:'https://www.coca-cola.com/content/dam/onexp/ba/bs/products/coca-cola/cc500.png'},
@@ -26,23 +27,13 @@ export class App {
   selectedType:number=3;
   selectedTypeName:string="";
 
-  productTypeList:any[]=[
-    {id:1, name:"Cokolada"},
-    {id:2, name:"Piće"},
-    {id:3, name:"Jelo"},
-    {id:4, name:"Bombone"}
-  ];
+  
 
-  changeProductName(){
-    console.log(this.productName);
+  ngOnInit() {
+    console.log("KOMPONENTA KREIRANA!");
   }
 
-  changeProductType(){
-    for(var i=0;i<this.productTypeList.length;i++){
-      if(this.selectedType==this.productTypeList[i].id)
-        this.selectedTypeName=this.productTypeList[i].name;
-    }
-  }
+  
 
   onInput(name: any){
   }

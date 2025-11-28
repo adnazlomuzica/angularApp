@@ -1,0 +1,11 @@
+<h1>Datum: {{today | date:'dd.MM.yyyy HH:mm:ss'}}</h1>
+  <div style="margin-top:20px;margin-bottom:20px;padding:20px;border:1px solid salmon">
+    <label style="margin-right:15px;">Naziv proizvoda</label>
+    <input type="text" [(ngModel)]="productName" (input)="changeProductName()" />
+    <div>
+      <select [(ngModel)]="selectedType" (change)="changeProductType()">
+        <option *ngFor="let i of productTypeList" [value]="i.id">{{i.name}}</option>
+      </select>
+    </div>
+    <h4>Trenutno odabrani tip proizvoda je: {{selectedTypeName}}</h4>
+  </div>
