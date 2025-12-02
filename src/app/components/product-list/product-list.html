@@ -1,7 +1,9 @@
 <div class="row">
     <div *ngFor="let i of products" class="col-lg-3 col-sm-6 col-12 productBox">
-        <img [src]="i.image" width="100px" height="100px" />
-        <p>{{i.name}}</p>
-        <p>{{i.price | number:'1.2-2'}}</p>
+        <a [routerLink]="['/product', i.id]">
+            <img [src]="i.image" width="100px" height="100px" />
+            <p>{{i.name}}</p>
+            <p>{{i.price | number:'1.2-2'}}</p>
+        </a>
     </div>
 </div>

@@ -2,12 +2,12 @@ import { NgFor, NgIf, NgClass, NgStyle, UpperCasePipe, LowerCasePipe, DatePipe, 
 import { Component, OnInit } from '@angular/core';
 import { ProductList } from "./components/product-list/product-list";
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterOutlet } from "@angular/router";
+import { Router, RouterLink, RouterOutlet, RouterLinkActive } from "@angular/router";
 
 @Component({
   selector: 'app-root',
   standalone:true,
-  imports: [NgIf, NgFor, NgClass, NgStyle, UpperCasePipe, LowerCasePipe, DatePipe, TitleCasePipe, DecimalPipe, CurrencyPipe, SlicePipe, FormsModule, RouterLink, RouterOutlet],
+  imports: [NgClass, NgStyle, UpperCasePipe, LowerCasePipe, DatePipe, TitleCasePipe, DecimalPipe, CurrencyPipe, SlicePipe, FormsModule, RouterLink, RouterOutlet, RouterLinkActive],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -26,14 +26,13 @@ export class App implements OnInit{
   productName:string="Coca Cola";
   selectedType:number=3;
   selectedTypeName:string="";
+  isLoggedIn:boolean=true;
 
-  
+  constructor(private router: Router){}
 
   ngOnInit() {
     console.log("KOMPONENTA KREIRANA!");
   }
-
-  
 
   onInput(name: any){
   }
@@ -52,5 +51,12 @@ export class App implements OnInit{
 
   onRightClick(event:any){
     console.log("Kliknut desni klik!");
+  }
+
+  openProductsOrLogin(){
+    if(this.isLoggedIn)
+      this.router.navigate(["products"]);
+    else
+      this.router.navigate(["login"]);
   }
 }

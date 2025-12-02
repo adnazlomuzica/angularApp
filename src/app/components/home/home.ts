@@ -1,10 +1,10 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [DatePipe, FormsModule],
+  imports: [DatePipe, FormsModule, NgFor],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
